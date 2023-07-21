@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
 var models = require("../models");
+var { Response, tokenValid } = require("../helpers/util");
 
 /* GET todos listing. */
 router.get("/", async function (req, res, next) {
@@ -14,7 +15,7 @@ router.get("/", async function (req, res, next) {
     });
     res.json(todos);
   } catch (e) {
-    res.json({ e });
+    res.status(500).json(new Response("something went wrong", false));
   }
 });
 
@@ -26,7 +27,7 @@ router.post("/", async function (req, res, next) {
     });
     res.json(todo);
   } catch (e) {
-    res.json({ e });
+    res.status(500).json(new Response("something went wrong", false));
   }
 });
 
@@ -48,7 +49,7 @@ router.put("/:id", async function (req, res, next) {
     );
     res.json(todo[1]);
   } catch (e) {
-    res.json({ e });
+    res.status(500).json(new Response("something went wrong", false));
   }
 });
 
@@ -62,7 +63,7 @@ router.delete("/:id", async function (req, res, next) {
     });
     res.json(todo);
   } catch (e) {
-    res.json({ e });
+    res.status(500).json(new Response("something went wrong", false));
   }
 });
 
